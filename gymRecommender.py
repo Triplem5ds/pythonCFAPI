@@ -83,7 +83,11 @@ def get_gym_recommendations(entered: List[str] = [], didnt_enter: List[str] = []
         for i in range(0,5):
             contest_data = cf_request('contest.standings?', [['contestId', str(entry['id'])], ['showUnofficial','true']])
             if contest_data:
-                if problems[0] <= len(contest_data['problems']) <= problems[1] and count_enter(contest_data['rows'], entered) == len(entered) and count_enter(contest_data['rows'], didnt_enter) == 0:            
+                if (
+                    problems[0] <= len(contest_data['problems']) <= problems[1]
+                    and count_enter(contest_data['rows'], entered) == len(entered)
+                    and count_enter(contest_data['rows'], didnt_enter) == 0
+                    ):            
                     standing_list.append(GYM(contest_data, entered))
                 break
             else:

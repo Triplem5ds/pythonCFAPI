@@ -13,8 +13,12 @@ from typing import Dict, List
 from CFReqeuster import cf_request
 import time
 
+
+def get_members(members):
+    return set([entry['handle'] for entry in members])
+
 class UserPerformance:
-    handle: List[str]
+    handle: set()
     penalty: int
     rank: int
     type: str
@@ -22,7 +26,7 @@ class UserPerformance:
     topics_solved: List[str] = []
     
     def __init__(self, data):
-        self.handle = data['party']['members'].values()
+        self.handle = get_members(data['party']['members'])
         self.penalty = data['penalty']
         self.rank = data['rank']
         self.type = data['praty']['participantType']
@@ -30,7 +34,6 @@ class UserPerformance:
         for index, problem in enumerate(data['problemResults']):
             if problem['points'] > 0:
                 self.problems_solved.append(index)
-    
     
 class GYM:
     id_gym: int
@@ -54,16 +57,15 @@ class GYM:
             if record['party']['participantType'] != 'PRACTICE':
                 self.number_of_contestants += 1
                 data[problems] = data.get(problems, 0) + 1
-            if len(set(record['party']['members'].values()) and users) != 0:
+            if len(get_members(record['party']['members']) and users) != 0:
                 data.append(UserPerformance(record))
                 
-        
         
 
 def count_enter(records: List, handles: set) -> int:
     res = set()
     for entry in records:
-        res = res or (handles and set(entry['party']['members'].values()))
+        res = res or (handles and get_members(entry['party']['members']))
     return len(res)
 
 def get_gym_recommendations(entered: List[str] = [], didnt_enter: List[str] = [],

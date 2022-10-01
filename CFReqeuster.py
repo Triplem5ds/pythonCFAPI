@@ -29,5 +29,10 @@ def cf_request(url, params: List[List[str]]):
     except Exception as e:
         print('eeee: ', e, url, params)
 
+def submission_request(contest_id, submission_id):
+    url = f"https://codeforces.com/gym/{contest_id}/submission/{submission_id}"
+    
+
+
 if __name__ == '__main__':
     print(cf_request('contest.hacks?', [['contestId', '566']]))

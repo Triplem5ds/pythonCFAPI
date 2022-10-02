@@ -1,7 +1,9 @@
+from ast import keyword
+import re
 import time
 from typing import List
 from CFReqeuster import cf_request
-import pandas as pd
+from lxml import etree
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -11,22 +13,36 @@ CF_PASS = 'M3YKHA69'
 CF_USER = 'KNB.'
 CF_PREFIX = 'https://codeforces.com/gym/'
 
+def get_span_keywords(span):
+    span = str(span)
+    for i in range(0,len(span)):
+        if span[i] == '>':
+            span = span[i+1::]
+            break
+    span = span[0:-7]
+    return span.strip()
+
+def get_submission_topics(browser, gym, submission):
+    browser.get(f'{CF_PREFIX}{gym}/submission/{submission}')
+    submission_code = browser.find_element(value='program-source-text')
+    keywords = BeautifulSoup(submission_code.get_attribute("outerHTML"), 'html.parser').find_all('span')
+    keywords = [get_span_keywords(k) for k in keywords]
+    return []
+
 def get_problem_submissions(browser, gym: str, problem: str):
     browser.get(f'{CF_PREFIX}{gym}/status/{problem}') #go to first status page
-    submissions_table = browser.find_element(by='class name', value='status-frame-datatable').get_attribute('innerHTML')
-    soup = BeautifulSoup(submissions_table, 'lxml')
-    table = soup.find_all('table')[0]
-    new_table = pd.DataFrame(columns=range(0,8), index=0)
-    row_maker = 0
-    for row in table.find_all('tr'):
-        column_maker = 0
-        columns = row.find_all('th')
-        for column in columns:
-            new_table.iat[row_maker, column_maker] = column.get_text()
-            column_maker += 1
-        row_maker += 1
-    print(new_table)
- 
+    submissions_table = browser.find_element(by='class name', value='status-frame-datatable')
+    soup = BeautifulSoup(submissions_table.get_attribute("innerHTML"), 'html.parser')
+    submissions = soup.find_all('a', href=True)
+    submission_codes = []
+    for submission in submissions:
+        arr = submission['href'].split('/')
+        if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'submission':
+            submission_codes.append(arr[-1])
+    
+    for submission in submission_codes:
+        topics = get_submission_topics(browser, gym, submission)
+    
 if __name__ == '__main__':
     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     browser.get('https://codeforces.com/enter?back=%2F')

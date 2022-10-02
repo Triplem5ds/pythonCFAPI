@@ -795,8 +795,9 @@ JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_deb
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3828: unreachable code after return statement
-1664711307196	geckodriver	INFO	Listening on 127.0.0.1:55561
-1664711310211	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55562" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileHFqUM8"
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1664721110008	Marionette	INFO	Stopped listening on port 54902
+e-debugging-port" "55562" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileHFqUM8"
 1664711310585	Marionette	INFO	Marionette enabled
 1664711310591	Marionette	INFO	Listening on port 55572
 Read port: 55572
@@ -809,8 +810,9 @@ JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_deb
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3828: unreachable code after return statement
-1664711658012	geckodriver	INFO	Listening on 127.0.0.1:55826
-1664711661027	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55827" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileQLHJNy"
+1664721118267	Marionette	INFO	Stopped listening on port 55572
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "55827" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileQLHJNy"
 1664711661389	Marionette	INFO	Marionette enabled
 1664711661395	Marionette	INFO	Listening on port 55838
 Read port: 55838
@@ -823,8 +825,9 @@ JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_deb
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3828: unreachable code after return statement
-1664711731955	geckodriver	INFO	Listening on 127.0.0.1:55959
-1664711734972	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55960" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofilefbvyZ9"
+1664721112156	Marionette	INFO	Stopped listening on port 55838
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "55960" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofilefbvyZ9"
 1664711735340	Marionette	INFO	Marionette enabled
 1664711735345	Marionette	INFO	Listening on port 55970
 Read port: 55970
@@ -837,3 +840,55 @@ JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_deb
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
 JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3828: unreachable code after return statement
+1664721116242	Marionette	INFO	Stopped listening on port 55970
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1664728547810	geckodriver	INFO	Listening on 127.0.0.1:63385
+1664728550827	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63386" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileu9vy3J"
+1664728551189	Marionette	INFO	Marionette enabled
+1664728551195	Marionette	INFO	Listening on port 63396
+Read port: 63396
+WebDriver BiDi listening on ws://127.0.0.1:63386
+1664728551315	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileu9vy3J\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63386/devtools/browser/ba97ff44-aa7c-47dc-af15-6d8608f50605
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+1664728573290	Marionette	INFO	Stopped listening on port 63396
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1664728577594	geckodriver	INFO	Listening on 127.0.0.1:63457
+1664728580611	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63458" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileBbj357"
+1664728580979	Marionette	INFO	Marionette enabled
+1664728580984	Marionette	INFO	Listening on port 63468
+Read port: 63468
+WebDriver BiDi listening on ws://127.0.0.1:63458
+1664728581108	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileBbj357\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63458/devtools/browser/27dd8fbd-bf79-4c44-a7a3-4aa481ae2cef
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3860: unreachable code after return statement
+1664728775495	Marionette	INFO	Stopped listening on port 63468
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "63591" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileY27nIf"
+1664728656744	Marionette	INFO	Marionette enabled
+1664728656749	Marionette	INFO	Listening on port 63602
+Read port: 63602
+WebDriver BiDi listening on ws://127.0.0.1:63591
+1664728656871	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Pillow\\AppData\\Local\\Temp\\rust_mozprofileY27nIf\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63591/devtools/browser/efe541bc-ac7f-43a8-b87e-85496cbdddca
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://codeforces.org/s/83389/js/bfaa.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://codeforces.com."
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript error: , line 0: NetworkError: A network error occurred.
+JavaScript warning: https://codeforces.com/gym/103938/status/C, line 3860: unreachable code after return statement

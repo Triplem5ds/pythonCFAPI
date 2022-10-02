@@ -1,0 +1,18 @@
+KeyTopicMap = {
+    'dp':'Dynamic Programming',
+    'memo':'Dynamic Programming',
+    'dfs':'Graphs',
+    'bfs':'Graphs',
+    'lis':'Dynamic Programming',
+    'fft':'fft',
+    'ntt':'fft',
+    'fwht':'fft',
+    'gauss':'Gauss',
+    'pt':'Geometry',
+    'circle':'Geometry',
+    'line':'Geometry',
+    'segment':'Geometry',
+    'eps':'Geometry',
+    'sieve': 'Number Theory',
+    'egcd': 'Number Theory',
+}

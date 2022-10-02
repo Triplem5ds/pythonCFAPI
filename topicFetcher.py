@@ -20,7 +20,7 @@ def get_span_keywords(span):
             span = span[i+1::]
             break
     span = span[0:-7]
-    return span.strip()
+    return span.strip().lower()
 
 def get_submission_topics(browser, gym, submission):
     browser.get(f'{CF_PREFIX}{gym}/submission/{submission}')

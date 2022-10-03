@@ -25,17 +25,20 @@ def get_span_keywords(span):
     return ''.join(span.strip().lower().split('_'))
 
 def get_submission_topics(browser, gym, submission):
-    browser.get(f'{CF_PREFIX}{gym}/submission/{submission}')
-    submission_code = browser.find_element(value='program-source-text')
-    keywords = BeautifulSoup(submission_code.get_attribute("outerHTML"), 'html.parser').find_all('span')
-    keywords = [get_span_keywords(k) for k in keywords]
-    topics = set()
-    for word in keyword:
-        if word in KeyTopicMap:
-            topics.add(KeyTopicMap[word])
-    return list(topics)
+    try:
+        browser.get(f'{CF_PREFIX}{gym}/submission/{submission}')
+        submission_code = browser.find_element(value='program-source-text')
+        keywords = BeautifulSoup(submission_code.get_attribute("outerHTML"), 'html.parser').find_all('span')
+        keywords = [get_span_keywords(k) for k in keywords]
+        topics = set()
+        for word in keywords:
+            if word in KeyTopicMap:
+                topics.add(KeyTopicMap[word])
+        return list(topics)
+    except Exception as e:
+        return []
 
-def get_problem_submissions(browser, gym: str, problem: str):
+def get_problem_topics(browser, gym: str, problem: str):
     browser.get(f'{CF_PREFIX}{gym}/status/{problem}') #go to first status page
     submissions_table = browser.find_element(by='class name', value='status-frame-datatable')
     soup = BeautifulSoup(submissions_table.get_attribute("innerHTML"), 'html.parser')
@@ -50,10 +53,10 @@ def get_problem_submissions(browser, gym: str, problem: str):
     for submission in submission_codes:
         topics = get_submission_topics(browser, gym, submission)
         for topic in topics:
-            topics_dict = topics_dict.get(topic, 0) + 1
-    return [k for k,v in topics_dict if v >= TOPIC_THRESHOLD]
-    
-if __name__ == '__main__':
+            topics_dict[topic] = topics_dict.get(topic, 0) + 1
+    return [k for k,v in topics_dict.items() if v >= TOPIC_THRESHOLD]
+
+def fetch_topics(gym):
     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     browser.get('https://codeforces.com/enter?back=%2F')
     handle = browser.find_element(value='handleOrEmail')
@@ -62,7 +65,21 @@ if __name__ == '__main__':
     password.send_keys(CF_PASS)
     browser.find_element(by='class name', value="submit").click() #login
     time.sleep(5)
-    get_problem_submissions(browser, gym='103938', problem='C')
+    browser.get(f'{CF_PREFIX}{gym}')
     time.sleep(5)
+    problems = BeautifulSoup(browser.find_element(by='class name',value='problems').get_attribute("innerHTML"), 'html.parser')
+    a_list = problems.find_all('a', href=True)
+    problem_list = []
+    for entry in a_list:
+        arr = entry['href'].split('/')
+        if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'problem':
+            problem_list.append(arr[-1])
+    problem_list = list(set(problem_list))
+    topics = []
+    for problem in problem_list:
+        topics += get_problem_topics(browser, gym=gym, problem=problem)
+    topics = list(set(topics))
+    return topics
     
-    
+if __name__ == '__main__':
+    print(fetch_topics('103921'))   

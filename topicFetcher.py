@@ -4,6 +4,7 @@ import time
 from typing import List
 from CFReqeuster import cf_request
 from lxml import etree
+from KeywordTopicMapping import KeyTopicMap
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -12,6 +13,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 CF_PASS = 'M3YKHA69'
 CF_USER = 'KNB.'
 CF_PREFIX = 'https://codeforces.com/gym/'
+TOPIC_THRESHOLD = 5
 
 def get_span_keywords(span):
     span = str(span)
@@ -27,7 +29,11 @@ def get_submission_topics(browser, gym, submission):
     submission_code = browser.find_element(value='program-source-text')
     keywords = BeautifulSoup(submission_code.get_attribute("outerHTML"), 'html.parser').find_all('span')
     keywords = [get_span_keywords(k) for k in keywords]
-    return []
+    topics = set()
+    for word in keyword:
+        if word in KeyTopicMap:
+            topics.add(KeyTopicMap[word])
+    return list(topics)
 
 def get_problem_submissions(browser, gym: str, problem: str):
     browser.get(f'{CF_PREFIX}{gym}/status/{problem}') #go to first status page
@@ -40,8 +46,12 @@ def get_problem_submissions(browser, gym: str, problem: str):
         if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'submission':
             submission_codes.append(arr[-1])
     
+    topics_dict = dict()
     for submission in submission_codes:
         topics = get_submission_topics(browser, gym, submission)
+        for topic in topics:
+            topics_dict = topics_dict.get(topic, 0) + 1
+    return [k for k,v in topics_dict if v >= TOPIC_THRESHOLD]
     
 if __name__ == '__main__':
     browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())

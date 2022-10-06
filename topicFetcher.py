@@ -40,20 +40,26 @@ def get_submission_topics(browser, gym, submission):
 
 def get_problem_topics(browser, gym: str, problem: str):
     browser.get(f'{CF_PREFIX}{gym}/status/{problem}') #go to first status page
-    submissions_table = browser.find_element(by='class name', value='status-frame-datatable')
-    soup = BeautifulSoup(submissions_table.get_attribute("innerHTML"), 'html.parser')
-    submissions = soup.find_all('a', href=True)
-    submission_codes = []
-    for submission in submissions:
-        arr = submission['href'].split('/')
-        if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'submission':
-            submission_codes.append(arr[-1])
-    
+    pages = browser.find_elements(by='class name', value='page-index')
+    max_page = 1
+    if pages:
+        max_page = int(pages[-1].get_attribute('pageindex'))
     topics_dict = dict()
-    for submission in submission_codes:
-        topics = get_submission_topics(browser, gym, submission)
-        for topic in topics:
-            topics_dict[topic] = topics_dict.get(topic, 0) + 1
+    for page in range(2,max_page+2):
+        submissions_table = browser.find_element(by='class name', value='status-frame-datatable')
+        soup = BeautifulSoup(submissions_table.get_attribute("innerHTML"), 'html.parser')
+        submissions = soup.find_all('a', href=True)
+        submission_codes = []
+        for submission in submissions:
+            arr = submission['href'].split('/')
+            if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'submission':
+                submission_codes.append(arr[-1])
+        for submission in submission_codes:
+            topics = get_submission_topics(browser, gym, submission)
+            for topic in topics:
+                topics_dict[topic] = topics_dict.get(topic, 0) + 1
+        browser.get(f'{CF_PREFIX}{gym}/status/{problem}?pageIndex={page}&order=BY_PROGRAM_LENGTH_ASC')
+        time.sleep(5)
     return [k for k,v in topics_dict.items() if v >= TOPIC_THRESHOLD]
 
 def fetch_topics(gym):

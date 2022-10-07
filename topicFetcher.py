@@ -24,7 +24,7 @@ def get_span_keywords(span):
     span = span[0:-7]
     return ''.join(span.strip().lower().split('_'))
 
-def get_submission_topics(browser, gym, submission):
+def get_submission_topics(browser, gym, submission, cntr):
     try:
         browser.get(f'{CF_PREFIX}{gym}/submission/{submission}')
         submission_code = browser.find_element(value='program-source-text')
@@ -34,6 +34,7 @@ def get_submission_topics(browser, gym, submission):
         for word in keywords:
             if word in KeyTopicMap:
                 topics.add(KeyTopicMap[word])
+        cntr += 1
         return list(topics)
     except Exception as e:
         return []
@@ -45,6 +46,7 @@ def get_problem_topics(browser, gym: str, problem: str):
     if pages:
         max_page = int(pages[-1].get_attribute('pageindex'))
     topics_dict = dict()
+    cnt = 0
     for page in range(2,max_page+2):
         submissions_table = browser.find_element(by='class name', value='status-frame-datatable')
         soup = BeautifulSoup(submissions_table.get_attribute("innerHTML"), 'html.parser')
@@ -55,9 +57,11 @@ def get_problem_topics(browser, gym: str, problem: str):
             if len(arr) == 5 and arr[1] == 'gym' and arr[3] == 'submission':
                 submission_codes.append(arr[-1])
         for submission in submission_codes:
-            topics = get_submission_topics(browser, gym, submission)
+            topics = get_submission_topics(browser, gym, submission, cnt)
             for topic in topics:
                 topics_dict[topic] = topics_dict.get(topic, 0) + 1
+            if cnt == 100:
+                break
         browser.get(f'{CF_PREFIX}{gym}/status/{problem}?pageIndex={page}&order=BY_PROGRAM_LENGTH_ASC')
         time.sleep(5)
     return [k for k,v in topics_dict.items() if v >= TOPIC_THRESHOLD]

@@ -88,4 +88,4 @@ def fetch_topics(gym):
     return topics
     
 if __name__ == '__main__':
-    print(fetch_topics('103921'))   
+    print(fetch_topics('101505'))   
